@@ -1,3 +1,4 @@
+
 function Content(props) {
   console.log(props);
   return (
@@ -19,3 +20,4 @@ function Content(props) {
     </span>
   );
 }
+export default Content
