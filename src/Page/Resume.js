@@ -6,7 +6,7 @@ import {
   MailOutlined,
   createFromIconfontCN,
 } from "@ant-design/icons";
-import CollectionOfWorks from "../conponents/CollectionOfWorks"
+import CollectionOfWorks from "../Components/CollectionOfWorks"
 import "antd/dist/antd.min.css";
 import "./Resume.css";
 
