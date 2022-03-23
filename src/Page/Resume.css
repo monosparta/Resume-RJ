@@ -1,0 +1,14 @@
+.contaner {
+  width: 70vw;
+  margin: 50px auto;
+}
+.Divider::after,
+.Divider::before {
+  border-top: 1px solid black !important;
+}
+.Divider > span{
+  font-size: 24px !important;
+}
+.img{
+    width: 100%;
+}
