@@ -1,6 +1,5 @@
 
 function Content(props) {
-  console.log(props);
   return (
     <span>
       {props.content.map((text) => {

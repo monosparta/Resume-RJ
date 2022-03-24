@@ -25,7 +25,15 @@ const dog = [
     "專案開發期間也常常指導組員的切版、排版的方法，自學JavaScript也都能做出想要的效果。",
   ],
 ];
-const monoLuck = [[""]];
+const monoLuck = [
+  [
+    "Mono-Luck是進入創科實習時做的第一份專案，用來登記會員想要的置物櫃，登記結束後抽選出配對結果。",
+  ],
+  [
+    "此專案使用React+Laravel的前後端分離架構，其中使用git做版本控制，並最後推到Heroku完成網站架設。",
+    "在這專案中我管理laravel後端專案、撰寫API、規劃ER-model，完成後端工作後也跟前端討論API資料格式。",
+  ],
+];
 
 function App() {
   return (
