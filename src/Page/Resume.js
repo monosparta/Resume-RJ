@@ -4,6 +4,7 @@ import { UserOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
 import Cakeicon from "../Components/Cakeicon.js";
+import SkillList from "../Components/SkillList.js";
 import "antd/dist/antd.min.css";
 import "./Resume.css";
 
@@ -35,6 +36,25 @@ const monoLuck = [
   ],
 ];
 
+const skillLists = [
+  {
+    title: "程式語言",
+    skill: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Python", "JAVA", "C"],
+  },
+  {
+    title: "框架",
+    skill: ["Bootstrap", "React", "Laravel", "Node.js", "AntDesign"],
+  },
+  {
+    title: "開發軟體",
+    skill: ["Visual Studio Code", "Dev-C++", "Android Studio", "Visual Studio"],
+  },
+  {
+    title: "其他軟體",
+    skill: ["Oracle VM VirtualBox", "Git", "XAMPP", "vagrant", "figma"],
+  },
+];
+
 function App() {
   return (
     <div className="contaner">
@@ -57,13 +77,11 @@ function App() {
       <Divider orientation="left" className="Divider" span>
         簡歷
       </Divider>
-
       <Content content={CV} />
 
       <Divider orientation="left" className="Divider" span>
         作品集
       </Divider>
-
       <Timeline>
         <Timeline.Item>
           <CollectionOfWorks src="./pic/dog.png" content={dog} />
@@ -77,6 +95,15 @@ function App() {
       <Divider orientation="left" className="Divider" span>
         專業技能
       </Divider>
+      <Row gutter={[16, 16]}>
+        {skillLists.map((skillList) => {
+          return (
+            <Col span={24} sm={{ span: 12 }} lg={{ span: 6 }} >
+              <SkillList title={skillList.title} skill={skillList.skill} />
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 }
