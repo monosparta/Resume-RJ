@@ -1,12 +1,20 @@
 import React from "react";
-import { Avatar, Row, Col, Divider, Timeline } from "antd";
-import { UserOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons";
+import { Row, Col, Divider, Timeline } from "antd";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
-import Cakeicon from "../Components/Cakeicon.js";
 import SkillList from "../Components/SkillList.js";
+import BasicInfo from "../Components/BasicInfo.js";
 import "antd/dist/antd.min.css";
 import "./Resume.css";
+
+const basic = {
+  pic: "./pic/head.png",
+  name: "劉爾捷",
+  nickname: "Jonathan, RJ",
+  birthday: "2001-10-25",
+  phone: "0978-458-745",
+  email: "jo901025@gmail.com",
+};
 
 const CV = [
   [
@@ -14,7 +22,6 @@ const CV = [
     "國中畢業時覺得應該離開台東去到好一點的學校，毅然決然到西部讀書，也很幸運的進到了想要的學校，並且考取了幾張證。到了競爭相較激烈的西部常常會感覺不上別人，也不確定我累積的技術、知識有多少能在用到職場上。",
     "在讀五專的歷程中，學了很多種程式語言，包括: Visual Basic、C、C++、Java、HTML、CSS、PHP等等…，也了解了更多包涵計算機概論、資料結構、人工智慧導論等基礎理論。",
     "在畢業專題時，我們這組選擇了做網頁，途中也自學到更多關於網頁的技術，例如:laravel架構、bootstrap等等…。",
-    "五專最後一學期我如願找到了實習機會，到了創科資訊實習。",
   ],
 ];
 const dog = [
@@ -58,21 +65,7 @@ const skillLists = [
 function App() {
   return (
     <div className="contaner">
-      <Row gutter={[16, 16]}>
-        <Col>
-          <Avatar shape="square" size={144} icon={<UserOutlined />} />
-        </Col>
-        <Col>
-          <h1>劉爾捷</h1>
-          <h3>
-            <Cakeicon></Cakeicon>：2001-10-25<br></br>
-            <PhoneOutlined />
-            ：0978-458-745<br></br>
-            <MailOutlined />
-            ：jo901025@gmail.com<br></br>
-          </h3>
-        </Col>
-      </Row>
+      <BasicInfo data={basic} />
 
       <Divider orientation="left" className="Divider" span>
         簡歷
@@ -98,7 +91,7 @@ function App() {
       <Row gutter={[16, 16]}>
         {skillLists.map((skillList) => {
           return (
-            <Col span={24} sm={{ span: 12 }} lg={{ span: 6 }} >
+            <Col span={24} sm={{ span: 12 }} lg={{ span: 6 }}>
               <SkillList title={skillList.title} skill={skillList.skill} />
             </Col>
           );
