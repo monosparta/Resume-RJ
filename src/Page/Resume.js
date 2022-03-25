@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Divider, Timeline } from "antd";
+import { Row, Col, Divider, Timeline,List } from "antd";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
 import SkillList from "../Components/SkillList.js";
@@ -71,21 +71,29 @@ const skillLists = [
   },
 ];
 
+const langs = [
+  {
+    lang: "中文",
+    describe: "母語",
+  },
+  {
+    lang: "英文",
+    describe: "搭配單字翻譯尚可讀懂網路文章資料",
+  },
+];
+
 function App() {
   return (
     <div className="contaner">
       <BasicInfo data={basic} />
-
       <Divider orientation="left" className="Divider" span>
         簡歷
       </Divider>
       <Content content={CV} />
-
       <Divider orientation="left" className="Divider" span>
         工作經驗
       </Divider>
-      <ExperiencesTimeline workExperiences={workExperiences}/>
-
+      <ExperiencesTimeline workExperiences={workExperiences} />
       <Divider orientation="left" className="Divider" span>
         作品集
       </Divider>
@@ -98,7 +106,10 @@ function App() {
           <CollectionOfWorks src="./pic/Mono-Luck.png" content={monoLuck} />
         </Timeline.Item>
       </Timeline>
-
+      <Divider orientation="left" className="Divider" span>
+        學歷
+      </Divider>
+      國立台中科技大學 資訊應用菁英班 日間部 五專 ： 就讀中
       <Divider orientation="left" className="Divider" span>
         專業技能
       </Divider>
@@ -111,6 +122,13 @@ function App() {
           );
         })}
       </Row>
+      <Divider orientation="left" className="Divider" span>
+        語言能力
+      </Divider>
+      <List
+        dataSource={langs}
+        renderItem={item => <List.Item>{item.lang}：{item.describe}</List.Item>}
+        />
     </div>
   );
 }

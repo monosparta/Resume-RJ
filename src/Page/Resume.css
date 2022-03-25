@@ -1,6 +1,7 @@
 .contaner {
   width: 75vw;
-  margin: 50px auto;
+  margin:  auto;
+  padding: 50px 0;
 }
 .Divider::after,
 .Divider::before {
