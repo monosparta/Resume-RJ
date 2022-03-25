@@ -12,3 +12,19 @@
 .img{
     width: 100%;
 }
+.workExperiences{
+  overflow: hidden;
+}
+.workExperiences > li{
+  margin-top: 7px;
+  left: calc(-100vw + 90px);
+  width: 200vw;
+}
+.workExperiences .ant-timeline-item-label {
+  width: calc(100vw - 18px) !important;
+}
+.workExperiences .ant-timeline-item-content {
+  margin-left: 22px;
+  width: calc(50vw - 40px) !important;
+}
+

@@ -24,6 +24,14 @@ const CV = [
     "在畢業專題時，我們這組選擇了做網頁，途中也自學到更多關於網頁的技術，例如:laravel架構、bootstrap等等…。",
   ],
 ];
+
+const workExperiences = [
+  {
+    time: "2021-02-14",
+    work: "創科資訊股份有限公司 Monosparta Code Camp",
+  },
+];
+
 const dog = [
   [
     "五專五年級時做了一個畢業專題的作品，是幫一位照顧流浪狗的阿姨做的網站，此網站描述了阿姨照顧流浪狗所遇上的困難，與關於狗的科普小知識，也做了助養、捐贈的管道。",
@@ -71,6 +79,19 @@ function App() {
         簡歷
       </Divider>
       <Content content={CV} />
+
+      <Divider orientation="left" className="Divider" span>
+        工作經驗
+      </Divider>
+      <Timeline mode="left" className="workExperiences">
+        {workExperiences.map((workExperience) => {
+          return (
+            <Timeline.Item label={workExperience.time}>
+              {workExperience.work}
+            </Timeline.Item>
+          );
+        })}
+      </Timeline>
 
       <Divider orientation="left" className="Divider" span>
         作品集
