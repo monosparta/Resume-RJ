@@ -4,6 +4,7 @@ import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
 import SkillList from "../Components/SkillList.js";
 import BasicInfo from "../Components/BasicInfo.js";
+import ExperiencesTimeline from "../Components/ExperiencesTimeline.js";
 import "antd/dist/antd.min.css";
 import "./Resume.css";
 
@@ -83,15 +84,7 @@ function App() {
       <Divider orientation="left" className="Divider" span>
         工作經驗
       </Divider>
-      <Timeline mode="left" className="workExperiences">
-        {workExperiences.map((workExperience) => {
-          return (
-            <Timeline.Item label={workExperience.time}>
-              {workExperience.work}
-            </Timeline.Item>
-          );
-        })}
-      </Timeline>
+      <ExperiencesTimeline workExperiences={workExperiences}/>
 
       <Divider orientation="left" className="Divider" span>
         作品集
