@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Divider, Timeline,List } from "antd";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
-import Content from "../Components/Content.js";
+import Content from "../Components/ontent.js";
 import SkillList from "../Components/SkillList.js";
 import BasicInfo from "../Components/BasicInfo.js";
 import ExperiencesTimeline from "../Components/ExperiencesTimeline.js";
