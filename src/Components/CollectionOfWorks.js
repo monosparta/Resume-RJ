@@ -1,6 +1,6 @@
 
 import { Row, Col, Image } from "antd";
-import Content from "./ontent.js"
+import Content from "./Content.js"
 function CollectionOfWorks(props) {
   return (
     <Row gutter={[16, 16]}>
