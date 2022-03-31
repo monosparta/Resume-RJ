@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Divider, Timeline,List } from "antd";
+import { Divider, Timeline, List } from "antd";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
 import SkillList from "../Components/SkillList.js";
@@ -28,7 +28,7 @@ const CV = [
 
 const workExperiences = [
   {
-    time: "2021-02-14",
+    time: "2021-02-14~現在",
     work: "創科資訊股份有限公司 Monosparta Code Camp",
   },
 ];
@@ -68,6 +68,19 @@ const skillLists = [
   {
     title: "其他軟體",
     skill: ["Oracle VM VirtualBox", "Git", "XAMPP", "vagrant", "figma"],
+  },
+];
+
+const licenses = [
+  {
+    project: "HTML & CSS",
+    license: ["MTA: Introduction to Programming using HTML and CSS"],
+  },
+  { project: "Android", license: ["iPAS行動裝置程式設計師初級"] },
+  { project: "Visual Basic", license: ["中華民國技術士-電腦軟體設計丙級"] },
+  {
+    project: "Microsoft Office",
+    license: ["TQC-OA PowerPoint 2016專業級", "TQC-OA Excel 2016專業級"],
   },
 ];
 
@@ -113,22 +126,29 @@ function App() {
       <Divider orientation="left" className="Divider" span>
         專業技能
       </Divider>
-      <Row gutter={[16, 16]}>
-        {skillLists.map((skillList) => {
-          return (
-            <Col span={24} sm={{ span: 12 }} lg={{ span: 6 }}>
-              <SkillList title={skillList.title} skill={skillList.skill} />
-            </Col>
-          );
-        })}
-      </Row>
+      <SkillList skillLists={skillLists} />
+      <Divider orientation="left" className="Divider" span>
+        證照
+      </Divider>
+      {licenses.map((licenses) => {
+        return(<List
+          size="small"
+          header={<h3>{licenses.project}</h3>}
+          dataSource={licenses.license}
+          renderItem={(item) => <List.Item>{item}</List.Item>}
+        />);
+      })}
       <Divider orientation="left" className="Divider" span>
         語言能力
       </Divider>
       <List
         dataSource={langs}
-        renderItem={item => <List.Item>{item.lang}：{item.describe}</List.Item>}
-        />
+        renderItem={(item) => (
+          <List.Item>
+            {item.lang}：{item.describe}
+          </List.Item>
+        )}
+      />
     </div>
   );
 }

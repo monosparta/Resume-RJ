@@ -18,7 +18,7 @@
 }
 .workExperiences > li{
   margin-top: 7px;
-  left: calc(-100vw + 90px);
+  left: calc(-100vw + 130px);
   width: 200vw;
 }
 .workExperiences .ant-timeline-item-label {
