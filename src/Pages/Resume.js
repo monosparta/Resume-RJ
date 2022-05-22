@@ -1,10 +1,12 @@
 import React from "react";
-import { Divider, Timeline, List } from "antd";
+import { Divider, Timeline, List} from "antd";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
 import SkillList from "../Components/SkillList.js";
 import BasicInfo from "../Components/BasicInfo.js";
 import ExperiencesTimeline from "../Components/ExperiencesTimeline.js";
+import CommentEditor from "../Components/CommentEditor.js";
+import MyLayout from "../Components/MyLayout.js";
 import "antd/dist/antd.min.css";
 import "./Resume.css";
 
@@ -15,14 +17,16 @@ const basic = {
   birthday: "2001-10-25",
   phone: "0978-458-745",
   email: "jo901025@gmail.com",
+  github: "https://github.com/rj1110634028",
+  
 };
 
 const CV = [
   [
-    "我來自台東，國中就被送去讀寄宿學校，培養了很好的獨立自主能力，隨和的個性也交了一群好朋友，至今仍常常聊天談心。",
-    "國中畢業時覺得應該離開台東去到好一點的學校，毅然決然到西部讀書，也很幸運的進到了想要的學校，並且考取了幾張證。到了競爭相較激烈的西部常常會感覺不上別人，也不確定我累積的技術、知識有多少能在用到職場上。",
-    "在讀五專的歷程中，學了很多種程式語言，包括: Visual Basic、C、C++、Java、HTML、CSS、PHP等等…，也了解了更多包涵計算機概論、資料結構、人工智慧導論等基礎理論。",
-    "在畢業專題時，我們這組選擇了做網頁，途中也自學到更多關於網頁的技術，例如:laravel架構、bootstrap等等…。",
+    "我來自台東，國中就被送去讀寄宿學校，培養很好的獨立自主能力，隨和的個性也交到一群好朋友，就算分散各縣市至今仍常常聊天談心。",
+    "國中畢業時覺得應該離開台東去到好一點的學校，毅然決然到西部讀書，也很幸運的進到了想要的學校，並且考取5張證照。在競爭相較激烈的西部常常會感覺不上別人，也不確定我累積的技術、知識有多少能在用到職場上。",
+    "本人即將畢業於國立台中科大五專部資訊應用菁英班，在讀五專的歷程中，學了Visual Basic、C、C++、Java、HTML、CSS、PHP等程式語言，也了解了計算機概論、資料結構、人工智慧導論等基礎理論。",
+    "在做畢業專題時，我們這組選擇了做網頁，途中也自學到laravel架構、bootstrap等等……。",
   ],
 ];
 
@@ -55,19 +59,15 @@ const monoLuck = [
 const skillLists = [
   {
     title: "程式語言",
-    skill: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Python", "JAVA", "C"],
+    skill: ["HTML", "CSS", "JavaScript", "PHP", "Python"],
   },
   {
     title: "框架",
-    skill: ["Bootstrap", "React", "Laravel", "Node.js", "AntDesign"],
-  },
-  {
-    title: "開發軟體",
-    skill: ["Visual Studio Code", "Dev-C++", "Android Studio", "Visual Studio"],
+    skill: ["Laravel", "Bootstrap", "React"],
   },
   {
     title: "其他軟體",
-    skill: ["Oracle VM VirtualBox", "Git", "XAMPP", "vagrant", "figma"],
+    skill: ["Git", "MySql", "vagrant", "figma"],
   },
 ];
 
@@ -86,18 +86,18 @@ const licenses = [
 
 const langs = [
   {
-    lang: "中文",
-    describe: "母語",
+    title: "中文",
+    describe: ["母語"],
   },
   {
-    lang: "英文",
-    describe: "搭配單字翻譯尚可讀懂網路文章資料",
+    title: "英文",
+    describe: ["搭配單字翻譯尚可讀懂網路文章資料"],
   },
 ];
 
-function App() {
+function Resume() {
   return (
-    <div className="contaner">
+    <MyLayout>
       <BasicInfo data={basic} />
       <Divider orientation="left" className="Divider" span>
         簡歷
@@ -120,10 +120,6 @@ function App() {
         </Timeline.Item>
       </Timeline>
       <Divider orientation="left" className="Divider" span>
-        學歷
-      </Divider>
-      國立台中科技大學 資訊應用菁英班 日間部 五專 ： 就讀中
-      <Divider orientation="left" className="Divider" span>
         專業技能
       </Divider>
       <SkillList skillLists={skillLists} />
@@ -141,16 +137,25 @@ function App() {
       <Divider orientation="left" className="Divider" span>
         語言能力
       </Divider>
-      <List
-        dataSource={langs}
-        renderItem={(item) => (
-          <List.Item>
-            {item.lang}：{item.describe}
-          </List.Item>
-        )}
-      />
-    </div>
+      {langs.map((lang) => {
+        return(
+        <List
+          size="small"
+          header={<h3>{lang.title}</h3>}
+          dataSource={lang.describe}
+          renderItem={(item) => (
+            <List.Item>
+              {item}
+            </List.Item>
+          )}
+        />)
+      })}
+      <Divider orientation="left" className="Divider" span>
+        留言板
+      </Divider>
+      <CommentEditor/>
+    </MyLayout>
   );
 }
 
-export default App;
+export default Resume;
