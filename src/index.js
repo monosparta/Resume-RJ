@@ -4,14 +4,18 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Resume from "./Pages/Resume";
 import Login from "./Pages/Login";
+import Singup from "./Pages/Singup";
 import reportWebVitals from "./reportWebVitals";
-
+import MyLayout from "./Components/MyLayout.js";
 ReactDOM.render(
   <Router>
-    <Routes>
-      <Route path="/" element={<Resume />} /> 
-      <Route path="/login" element={<Login />} /> 
-    </Routes>
+    <MyLayout>
+      <Routes>
+        <Route path="/" element={<Resume />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/singup" element={<Singup />} />
+      </Routes>
+    </MyLayout>
   </Router>,
   document.getElementById("root")
 );

@@ -1,12 +1,12 @@
 import React from "react";
-import { Divider, Timeline, List} from "antd";
+import { Divider, Timeline, List } from "antd";
 import CollectionOfWorks from "../Components/CollectionOfWorks.js";
 import Content from "../Components/Content.js";
 import SkillList from "../Components/SkillList.js";
 import BasicInfo from "../Components/BasicInfo.js";
 import ExperiencesTimeline from "../Components/ExperiencesTimeline.js";
 import CommentEditor from "../Components/CommentEditor.js";
-import MyLayout from "../Components/MyLayout.js";
+import GoTop from "../Components/GoTop.js";
 import "antd/dist/antd.min.css";
 import "./Resume.css";
 
@@ -18,7 +18,6 @@ const basic = {
   phone: "0978-458-745",
   email: "jo901025@gmail.com",
   github: "https://github.com/rj1110634028",
-  
 };
 
 const CV = [
@@ -97,7 +96,7 @@ const langs = [
 
 function Resume() {
   return (
-    <MyLayout>
+    <>
       <BasicInfo data={basic} />
       <Divider orientation="left" className="Divider" span>
         簡歷
@@ -127,34 +126,34 @@ function Resume() {
         證照
       </Divider>
       {licenses.map((licenses) => {
-        return(<List
-          size="small"
-          header={<h3>{licenses.project}</h3>}
-          dataSource={licenses.license}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
-        />);
+        return (
+          <List
+            size="small"
+            header={<h3>{licenses.project}</h3>}
+            dataSource={licenses.license}
+            renderItem={(item) => <List.Item>{item}</List.Item>}
+          />
+        );
       })}
       <Divider orientation="left" className="Divider" span>
         語言能力
       </Divider>
       {langs.map((lang) => {
-        return(
-        <List
-          size="small"
-          header={<h3>{lang.title}</h3>}
-          dataSource={lang.describe}
-          renderItem={(item) => (
-            <List.Item>
-              {item}
-            </List.Item>
-          )}
-        />)
+        return (
+          <List
+            size="small"
+            header={<h3>{lang.title}</h3>}
+            dataSource={lang.describe}
+            renderItem={(item) => <List.Item>{item}</List.Item>}
+          />
+        );
       })}
       <Divider orientation="left" className="Divider" span>
         留言板
       </Divider>
-      <CommentEditor/>
-    </MyLayout>
+      <CommentEditor />
+      <GoTop />
+    </>
   );
 }
 
