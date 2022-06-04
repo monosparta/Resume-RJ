@@ -22,8 +22,8 @@ const Login = () => {
     console.log("Failed:", errorInfo);
   };
 
-  const Singup = (errorInfo) => {
-    history("/singup");
+  const Signup = (errorInfo) => {
+    history("/Signup");
   };
 
   return (
@@ -80,7 +80,7 @@ const Login = () => {
         <Button
           type="link"
           htmlType="button"
-          onClick={Singup}
+          onClick={Signup}
           style={{ padding: "0" }}
         >
           註冊

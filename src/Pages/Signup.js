@@ -1,18 +1,18 @@
 import { Form, Input, Button, Space, Row, Col, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import "./Singup.css";
+import "./Signup.css";
 import axios from "../axios";
 
-const Login = () => {
+const Signup = () => {
   let history = useNavigate();
   const onFinish = async (values) => {
     try {
       console.log(JSON.stringify(values));
-      const singup = await axios.post("/api/signup", values);
-      localStorage.setItem("token", singup.data["token"]);
-      localStorage.setItem("reFreshToken", singup.data["reFreshToken"]);
+      const Signup = await axios.post("/api/signup", values);
+      localStorage.setItem("token", Signup.data["token"]);
+      localStorage.setItem("reFreshToken", Signup.data["reFreshToken"]);
       message.success("註冊成功");
-      history("/")
+      history("/");
     } catch (error) {
       message.error(error.response.data.err);
     }
@@ -20,10 +20,6 @@ const Login = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  };
-
-  const Singup = (errorInfo) => {
-    history("/login");
   };
 
   return (
@@ -109,12 +105,7 @@ const Login = () => {
           註冊
         </Button>
         <Space style={{ paddingLeft: "10px" }}>已有帳號?</Space>
-        <Button
-          type="link"
-          htmlType="button"
-          onClick={Singup}
-          style={{ padding: "0" }}
-        >
+        <Button type="link" htmlType="button" style={{ padding: "0" }}>
           登入
         </Button>
       </Form.Item>
@@ -122,4 +113,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Resume from "./Pages/Resume";
 import Login from "./Pages/Login";
-import Singup from "./Pages/Singup";
+import Signup from "./Pages/Signup";
 import reportWebVitals from "./reportWebVitals";
 import MyLayout from "./Components/MyLayout.js";
 ReactDOM.render(
@@ -13,7 +13,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<Resume />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/singup" element={<Singup />} />
+        <Route path="/Signup" element={<Signup />} />
       </Routes>
     </MyLayout>
   </Router>,
