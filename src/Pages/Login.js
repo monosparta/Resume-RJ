@@ -1,17 +1,23 @@
 import { Form, Input, Button, Checkbox, Space, message } from "antd";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import axios from "../axios";
 
 const Login = () => {
-  let history = useNavigate();
+  const history = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      history("/");
+    }
+  });
   const onFinish = async (values) => {
     try {
       const login = await axios.post("/api/login", values);
       localStorage.setItem("token", login.data["token"]);
       localStorage.setItem("reFreshToken", login.data["reFreshToken"]);
       message.success("登入成功");
-      history("/")
+      history("/");
     } catch (error) {
       message.error("信箱或密碼錯誤");
       console.log(error.response.data["err"]);
