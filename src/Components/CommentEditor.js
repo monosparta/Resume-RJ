@@ -88,9 +88,13 @@ function CommentEditor() {
     }
   };
 
-  // setInterval(() => {
-  //   getComment();
-  // }, 1000 * 3);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     if (!loading) {
+  //       getComment();
+  //     }
+  //   }, 1000 * 1);
+  // }, [loading]);
 
   useEffect(() => {
     const get = async () => {
