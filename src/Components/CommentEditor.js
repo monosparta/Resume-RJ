@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Comment,
   Form,
@@ -32,7 +32,7 @@ const CommentList = ({ comments }) => (
   />
 );
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+const Editor = ({ onChange, onSubmit, loading, value }) => (
   <>
     <Form.Item>
       <TextArea rows={4} onChange={onChange} value={value} />
@@ -40,7 +40,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     <Form.Item>
       <Button
         htmlType="submit"
-        loading={submitting}
+        loading={loading}
         onClick={onSubmit}
         type="primary"
       >
@@ -51,30 +51,24 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 
 function CommentEditor() {
-  const [state, setState] = React.useState({
-    comments: [],
-    submitting: false,
-  });
+  const [comments, setComments] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [value, setValue] = React.useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!value) {
       return;
     }
 
-    setState({
-      ...state,
-      submitting: true,
-    });
+    setLoading(true);
 
-    setTimeout(() => {
-      getComment();
-      setState({
-        submitting: false,
-        comments: [...state.comments],
-      });
-      setValue("");
-    }, 1000);
+    try {
+      const send = await axios.post("/api/comment", {});
+      const { data } = send;
+      console.table(data);
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -87,53 +81,51 @@ function CommentEditor() {
       const { data } = get;
       console.dir(get);
       console.table(data);
-      setState({
-        ...state,
-        comments: data.comments,
-      });
+      setComments(data.comments);
+      setLoading(false);
     } catch (error) {
       throw new Error(error);
     }
   };
-  
-  const sendComment = async () => {
-    try {
-      const send = await axios.post("/api/comment",{});
-      const { data } = send;
-      console.table(send.status);
-      console.table(data);
-      
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+
   // setInterval(() => {
   //   getComment();
   // }, 1000 * 3);
+
+  useEffect(() => {
+    const get = async () => {
+      await getComment();
+    };
+    if (loading) {
+      setTimeout(() => {
+        get();
+      }, 1000);
+    }
+  }, [loading]);
 
   return (
     <>
       <Card>
         <Skeleton
-          loading={true}
+          loading={loading}
           paragraph={{ rows: 2 }}
           style={{ width: 500, marginTop: 10 }}
           active
         />
         <Skeleton
-          loading={true}
+          loading={loading}
           paragraph={{ rows: 1 }}
           style={{ width: 500, marginTop: 10 }}
           active
         />
-        {state.comments.length > 0 && <CommentList comments={state.comments} />}
+        {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
           content={
             <Editor
               onChange={handleChange}
               onSubmit={handleSubmit}
-              submitting={state.submitting}
+              submitting={loading}
               value={value}
             />
           }
