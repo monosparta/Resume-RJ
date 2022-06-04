@@ -1,10 +1,21 @@
-import { Form, Input, Button, Space, Row, Col } from "antd";
+import { Form, Input, Button, Space, Row, Col, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./Singup.css";
+import axios from "../axios";
+
 const Login = () => {
   let history = useNavigate();
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    try {
+      console.log(JSON.stringify(values));
+      const singup = await axios.post("/api/signup", values);
+      localStorage.setItem("token", singup.data["token"]);
+      localStorage.setItem("reFreshToken", singup.data["reFreshToken"]);
+      message.success("註冊成功");
+      history("/")
+    } catch (error) {
+      message.error(error.response.data.err);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -32,7 +43,7 @@ const Login = () => {
     >
       <Form.Item
         label="名字"
-        name="username"
+        name="name"
         hasFeedback
         rules={[{ required: true, message: "請輸入名字" }]}
       >
