@@ -1,10 +1,12 @@
 import { Layout, Menu, Dropdown, Space, Row, Col } from "antd";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyLayout.css";
 
 const { Header, Content } = Layout;
 
 function MyLayout({ children }) {
+  const [refresh, setRefresh] = useState(true);
   let history = useNavigate();
   const menu = (
     <Menu
@@ -22,12 +24,15 @@ function MyLayout({ children }) {
   function handleLogin() {
     history("/login");
   }
-  function handleLogout() {}
+  function handleLogout() {
+    localStorage.setItem("token", "");
+    setRefresh(!refresh);
+  }
   function home() {
     history("/");
   }
-  const User = () => {
-    if (localStorage.getItem("token") == null) {
+  const User = (refresh) => {
+    if (!localStorage.getItem("token")) {
       return (
         <a onClick={handleLogin} href>
           Login
@@ -54,7 +59,7 @@ function MyLayout({ children }) {
         <a onClick={home} href>
           劉爾捷個人網站
         </a>
-        <User />
+        <User refresh={refresh} />
       </Header>
       <Content className="Content">
         <Row justify="center" align="middle">
