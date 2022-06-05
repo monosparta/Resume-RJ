@@ -25,7 +25,10 @@ function MyLayout({ children }) {
     history("/login");
   }
   function handleLogout() {
+    localStorage.setItem("id", "");
+    localStorage.setItem("name", "");
     localStorage.setItem("token", "");
+    localStorage.setItem("reFreshToken", "");
     setRefresh(!refresh);
   }
   function home() {
@@ -39,10 +42,11 @@ function MyLayout({ children }) {
         </a>
       );
     } else {
+      const name = localStorage.getItem("name");
       return (
         <Dropdown overlay={menu} placement="bottom" arrow>
           <a href>
-            <Space>name</Space>
+            <Space>{name}</Space>
           </a>
         </Dropdown>
       );

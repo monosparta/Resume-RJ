@@ -9,6 +9,8 @@ const Signup = () => {
     try {
       console.log(JSON.stringify(values));
       const Signup = await axios.post("/api/signup", values);
+      localStorage.setItem("id", Signup.data["id"]);
+      localStorage.setItem("name", Signup.data["name"]);
       localStorage.setItem("token", Signup.data["token"]);
       localStorage.setItem("reFreshToken", Signup.data["reFreshToken"]);
       message.success("註冊成功");

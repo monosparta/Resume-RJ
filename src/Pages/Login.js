@@ -14,6 +14,8 @@ const Login = () => {
   const onFinish = async (values) => {
     try {
       const login = await axios.post("/api/login", values);
+      localStorage.setItem("id", login.data["id"]);
+      localStorage.setItem("name", login.data["name"]);
       localStorage.setItem("token", login.data["token"]);
       localStorage.setItem("reFreshToken", login.data["reFreshToken"]);
       message.success("登入成功");
