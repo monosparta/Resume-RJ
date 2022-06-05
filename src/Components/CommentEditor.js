@@ -7,7 +7,7 @@ import {
   Input,
   Card,
   Skeleton,
-  Divider,
+  // Divider,
 } from "antd";
 import moment from "./LocaleMoment";
 import axios from "../axios";
@@ -26,7 +26,7 @@ const CommentList = ({ comments }) => (
           content={props.comment}
           datetime={moment(props.createdAt).fromNow()}
         />
-        <Divider orientation="left" className="Divider" span></Divider>
+        {/* <Divider orientation="left" className="Divider" span></Divider> */}
       </>
     )}
   />
@@ -63,15 +63,19 @@ function CommentEditor() {
     setLoading(true);
 
     try {
-      const send = await axios.post("/api/comment", {});
+      const send = await axios.post("/api/auth/comment", {
+        comment: value.trim(),
+      });
       const { data } = send;
       console.table(data);
+      setValue("");
     } catch (error) {
       throw new Error(error);
     }
   };
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     setValue(e.target.value);
   };
 
@@ -88,13 +92,11 @@ function CommentEditor() {
     }
   };
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     if (!loading) {
-  //       getComment();
-  //     }
-  //   }, 1000 * 1);
-  // }, [loading]);
+  useEffect(() => {
+    setInterval(() => {
+      getComment()
+    }, (1000 * 5));
+  }, []);
 
   useEffect(() => {
     const get = async () => {
@@ -123,18 +125,18 @@ function CommentEditor() {
           active
         />
         {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment
-          // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
-          content={
-            <Editor
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-              submitting={loading}
-              value={value}
-            />
-          }
-        />
       </Card>
+      <Comment
+        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+        content={
+          <Editor
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            submitting={loading}
+            value={value}
+          />
+        }
+      />
     </>
   );
 }
