@@ -1,0 +1,19 @@
+.commentList .ant-list-items {
+  max-height: 700px;
+  overflow-y: scroll;
+}
+.commentList .ant-list-items::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.commentList .ant-list-items::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px gray;
+  border-radius: 8px;
+}
+
+/* Handle */
+.commentList .ant-list-items::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 8px;
+}
