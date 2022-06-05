@@ -12,8 +12,8 @@ const style = {
 
 const GoTop = () => (
   <>
-    <BackTop>
-      <div style={style}>UP</div>
+    <BackTop style={{bottom:"10px",right:"10px"}}>
+      <div style={style}>Top</div>
     </BackTop>
   </>
 );
