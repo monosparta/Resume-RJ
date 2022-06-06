@@ -67,7 +67,6 @@ const MyComment = ({ props, refresh }) => {
               refresh();
             });
         } catch (error) {
-          setLoading(false);
           throw new Error(error);
         }
       },
