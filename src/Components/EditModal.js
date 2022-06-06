@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Modal, Form, Input } from "antd";
 
+const { TextArea } = Input;
+
 const EditModal = ({ props, visible, handleEdit, onCancel, loading }) => {
   const [form] = Form.useForm();
   const [value, setValue] = useState({
@@ -62,7 +64,7 @@ const EditModal = ({ props, visible, handleEdit, onCancel, loading }) => {
             }),
           ]}
         >
-          <Input onChange={onChange} />
+          <TextArea rows={3} onChange={onChange} />
         </Form.Item>
         <Form.Item name="id" hidden={true}></Form.Item>
       </Form>
