@@ -25,9 +25,9 @@ const EditModal = ({ props, visible, handleEdit, onCancel, loading }) => {
       destroyOnClose={true}
       confirmLoading={loading}
       visible={visible}
-      title="Edit Comment"
-      okText="Edit"
-      cancelText="Cancel"
+      title="編輯留言"
+      okText="確認"
+      cancelText="取消"
       onCancel={onCancel}
       onOk={() => {
         form.submit();

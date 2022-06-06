@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
-import { Comment, List, Tooltip } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Comment, List, Tooltip, Modal } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import axios from "../axios";
 import moment from "./LocaleMoment";
 import EditModal from "./EditModal.js";
@@ -45,7 +49,31 @@ const MyComment = ({ props, refresh }) => {
     }
   };
 
-  const handleDelete = (e) => {};
+  const handleDelete = (props) => {
+    Modal.confirm({
+      title: "確定刪除?",
+      icon: <ExclamationCircleOutlined />,
+      content: `內容：${props.comment}`,
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        try {
+          axios
+            .delete(`/api/auth/comment/${props.id}`, {
+              headers: { token: localStorage.getItem("token") },
+            })
+            .then((response) => {
+              refresh();
+            });
+        } catch (error) {
+          setLoading(false);
+          throw new Error(error);
+        }
+      },
+      onCancel() {},
+    });
+  };
 
   return (
     <List.Item>
