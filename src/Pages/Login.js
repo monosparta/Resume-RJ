@@ -7,6 +7,7 @@ import axios from "../axios";
 const Login = () => {
   const history = useNavigate();
   useEffect(() => {
+    console.log("1");
     if (localStorage.getItem("token")) {
       history("/");
     }

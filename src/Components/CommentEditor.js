@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Comment, Form, Button, List, Input, Card } from "antd";
+import React, { useState } from "react";
+import { Comment, Form, Button, Input, Card } from "antd";
 import axios from "../axios";
-import MyComment from "./MyComment.js";
+import CommentList from "./CommentList.js";
 import "./CommentEditor.css";
 
 const { TextArea } = Input;
-
-const CommentList = ({ comments, refresh }) => (
-  <List
-    className="commentList"
-    size="small"
-    dataSource={comments}
-    header={`${comments.length} 則留言`}
-    itemLayout="horizontal"
-    renderItem={(props) => {
-      return props.comment ? (
-        <MyComment props={props} refresh={refresh} />
-      ) : null;
-    }}
-  />
-);
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
@@ -40,7 +25,6 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 
 const CommentEditor = () => {
-  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [value, setValue] = useState("");
 
@@ -57,7 +41,7 @@ const CommentEditor = () => {
         },
         { headers: { token: localStorage.getItem("token") } }
       );
-      await getComment();
+      // await getComment();
       setValue("");
     } catch (error) {
       setLoading(false);
@@ -69,39 +53,10 @@ const CommentEditor = () => {
     setValue(e.target.value);
   };
 
-  const getComment = async () => {
-    try {
-      const get = await axios.get("/api/comment");
-      const { data } = get;
-      setTimeout(() => {
-        setComments(data.comments);
-        // console.log(data.comments);
-        setLoading(false);
-      }, 200);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
-  useEffect(() => {
-    setInterval(() => {
-      getComment();
-    }, 1000 * 5);
-  }, []);
-
-  useEffect(() => {
-    const get = async () => {
-      await getComment();
-    };
-    get();
-  }, []);
-
   return (
     <>
       <Card>
-        {comments.length > 0 && (
-          <CommentList comments={comments} refresh={getComment} />
-        )}
+        <CommentList loading={loading} setLoading={setLoading} />
       </Card>
       <Comment
         // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}

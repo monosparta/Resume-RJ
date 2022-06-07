@@ -31,7 +31,6 @@ const MyComment = ({ props, refresh }) => {
 
   const handleEdit = async ({ id, comment }) => {
     setLoading(true);
-    console.log(id, comment);
     try {
       await axios.patch(
         `/api/auth/comment/${id}`,
@@ -77,6 +76,7 @@ const MyComment = ({ props, refresh }) => {
   return (
     <List.Item>
       <Comment
+        style={{ whiteSpace: "pre-wrap" }}
         actions={
           props.userId === parseInt(localStorage.getItem("id"))
             ? [

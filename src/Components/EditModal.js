@@ -20,7 +20,6 @@ const EditModal = ({ props, visible, handleEdit, onCancel, loading }) => {
       comment: props.comment,
       id: props.id,
     });
-    console.log(props.comment);
   }, [props, visible]);
   return (
     <Modal

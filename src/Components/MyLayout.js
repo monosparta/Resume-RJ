@@ -14,7 +14,12 @@ function MyLayout({ children }) {
         {
           label: (
             <a onClick={handleLogout} rel="" href>
-              登出
+              <Space
+                direction="horizontal"
+                style={{ width: "100%", justifyContent: "center" }}
+              >
+                登出
+              </Space>
             </a>
           ),
         },
