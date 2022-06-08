@@ -1,55 +1,70 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  // useRef
+} from "react";
 import { List, Input, Space, Button } from "antd";
 import axios from "../axios";
 import MyComment from "./MyComment.js";
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
+const { Search } = Input;
 
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+// function useInterval(callback, delay) {
+//   const savedCallback = useRef();
 
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
+//   // Remember the latest callback.
+//   useEffect(() => {
+//     savedCallback.current = callback;
+//   }, [callback]);
+
+//   // Set up the interval.
+//   useEffect(() => {
+//     function tick() {
+//       savedCallback.current();
+//     }
+//     if (delay !== null) {
+//       let id = setInterval(tick, delay);
+//       return () => clearInterval(id);
+//     }
+//   }, [delay]);
+// }
 
 const CommentList = ({ setLoading, loading }) => {
   const [comments, setComments] = useState([]);
   const [search, setSearch] = useState({ value: "", loading: false });
 
   const ChangeSearch = (e) => {
-    console.log(e.target.value);
     setSearch({
       ...search,
       value: e.target.value,
     });
   };
 
+  const onSearch = (value) => {
+    setSearch({
+      value: value,
+      loading: true,
+    });
+  };
+
   const resetSearch = () => {
     setSearch({
-      ...search,
       value: "",
+      loading: true,
     });
   };
 
   const getComment = () => {
     try {
-      console.log(search.value);
       axios
         .get(`/api/comment${search.value ? `?search=${search.value}` : ""}`)
         .then((response) => {
           const { data } = response;
           setComments(data.comments);
           setLoading(false);
+          setSearch({
+            ...search,
+            loading: false,
+          });
         });
     } catch (error) {
       setLoading(true);
@@ -57,13 +72,9 @@ const CommentList = ({ setLoading, loading }) => {
     }
   };
 
-  useInterval(() => {
-    getComment();
-  }, 1000 * 5);
-
-  useEffect(() => {
-    getComment();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // useInterval(() => {
+  //   getComment();
+  // }, 1000 * 30);
 
   useEffect(() => {
     if (loading) {
@@ -73,7 +84,7 @@ const CommentList = ({ setLoading, loading }) => {
 
   useEffect(() => {
     getComment();
-  }, [search.value]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [search.loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <List
@@ -85,11 +96,13 @@ const CommentList = ({ setLoading, loading }) => {
           <span>{comments.length} 則留言</span>
           <span>
             <Space>
-              <Input
+              <Search
                 size="small"
                 placeholder="關鍵字搜尋"
                 value={search.value}
                 onChange={ChangeSearch}
+                onSearch={onSearch}
+                loading={search.loading}
                 style={{ maxWidth: "200px" }}
               />
               <Button type="primary" size="small" onClick={resetSearch}>

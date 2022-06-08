@@ -26,6 +26,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 
 const CommentEditor = () => {
   const [loading, setLoading] = useState(true);
+  const [LoadComment, setLoadComment] = useState(false);
   const [value, setValue] = useState("");
 
   const handleSubmit = async () => {
@@ -41,12 +42,12 @@ const CommentEditor = () => {
         },
         { headers: { token: localStorage.getItem("token") } }
       );
-      // await getComment();
+      setLoadComment(true);
       setValue("");
     } catch (error) {
-      setLoading(false);
       throw new Error(error);
     }
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -56,7 +57,7 @@ const CommentEditor = () => {
   return (
     <>
       <Card>
-        <CommentList loading={loading} setLoading={setLoading} />
+        <CommentList loading={LoadComment} setLoading={setLoadComment} />
       </Card>
       <Comment
         // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
