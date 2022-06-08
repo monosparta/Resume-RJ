@@ -1,4 +1,11 @@
-import { Form, Input, Button, Checkbox, Space, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Space,
+  message,
+  // Checkbox
+} from "antd";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -20,14 +27,13 @@ const Login = () => {
       history("/");
     }
   });
-  
+
   const onFinish = async (values) => {
     try {
       const login = await axios.post("/api/login", values);
       localStorage.setItem("id", login.data["id"]);
       localStorage.setItem("name", login.data["name"]);
       localStorage.setItem("token", login.data["token"]);
-      localStorage.setItem("reFreshToken", login.data["reFreshToken"]);
       message.success("登入成功");
       history("/");
     } catch (error) {
@@ -40,18 +46,22 @@ const Login = () => {
     console.log("Failed:", errorInfo);
   };
 
-  
   const anonymouslogin = async () => {
-    try {
-      const login = await axios.get("/api/anonymouslogin");
-      localStorage.setItem("id", login.data["id"]);
-      localStorage.setItem("name", login.data["name"]);
-      localStorage.setItem("token", login.data["guestToken"]);
-      message.success("登入成功");
-      history("/");
-    } catch (error) {
-      message.error(error.response.data["err"]);
-      console.log(error.response.data["err"]);
+    if (localStorage.getItem("guestToken")) {
+      localStorage.setItem("token", localStorage.getItem("guestToken"));
+    } else {
+      try {
+        const login = await axios.get("/api/anonymouslogin");
+        localStorage.setItem("id", login.data["id"]);
+        localStorage.setItem("name", login.data["name"]);
+        localStorage.setItem("token", login.data["guestToken"]);
+        localStorage.setItem("guestToken", login.data["guestToken"]);
+        message.success("登入成功");
+        history("/");
+      } catch (error) {
+        message.error(error.response.data["err"]);
+        console.log(error.response.data["err"]);
+      }
     }
   };
 

@@ -11,7 +11,7 @@ import "antd/dist/antd.min.css";
 import "./Resume.css";
 
 const basic = {
-  pic: "./pic/head.png",
+  pic: "./pic/head.jpg",
   name: "劉爾捷",
   nickname: "Jonathan, RJ",
   birthday: "2001-10-25",

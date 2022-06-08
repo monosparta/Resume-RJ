@@ -33,7 +33,6 @@ function MyLayout({ children }) {
     localStorage.setItem("id", "");
     localStorage.setItem("name", "");
     localStorage.setItem("token", "");
-    localStorage.setItem("reFreshToken", "");
     setRefresh(!refresh);
   }
   function home() {

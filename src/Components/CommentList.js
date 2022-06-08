@@ -83,7 +83,9 @@ const CommentList = ({ setLoading, loading }) => {
   }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    getComment();
+    if (search.loading) {
+      getComment();
+    }
   }, [search.loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

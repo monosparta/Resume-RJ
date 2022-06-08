@@ -25,8 +25,8 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 
 const CommentEditor = () => {
-  const [loading, setLoading] = useState(true);
-  const [LoadComment, setLoadComment] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [LoadComment, setLoadComment] = useState(true);
   const [value, setValue] = useState("");
 
   const handleSubmit = async () => {
