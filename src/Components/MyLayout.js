@@ -1,5 +1,5 @@
 import { Layout, Menu, Dropdown, Space, Row, Col } from "antd";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyLayout.css";
 
@@ -8,9 +8,6 @@ const { Header, Content } = Layout;
 function MyLayout({ children }) {
   const [refresh, setRefresh] = useState(true);
   let history = useNavigate();
-  useEffect(() => {
-    document.title = "劉爾捷的個人網站";
-  }, []);
   const menu = (
     <Menu
       items={[
