@@ -3,7 +3,15 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import axios from "../axios";
-
+// const DeviceInfo = require('device-info');
+// const hw = new DeviceInfo({
+//   manufacturer,
+//   model,
+//   revision,
+//   deviceClass,
+//   deviceId,
+// });
+// console.log(hw,deviceId);
 const Login = () => {
   const history = useNavigate();
   useEffect(() => {
@@ -12,6 +20,7 @@ const Login = () => {
       history("/");
     }
   });
+  
   const onFinish = async (values) => {
     try {
       const login = await axios.post("/api/login", values);
@@ -29,6 +38,21 @@ const Login = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  
+  const anonymouslogin = async () => {
+    try {
+      const login = await axios.get("/api/anonymouslogin");
+      localStorage.setItem("id", login.data["id"]);
+      localStorage.setItem("name", login.data["name"]);
+      localStorage.setItem("token", login.data["guestToken"]);
+      message.success("登入成功");
+      history("/");
+    } catch (error) {
+      message.error(error.response.data["err"]);
+      console.log(error.response.data["err"]);
+    }
   };
 
   const Signup = (errorInfo) => {
@@ -82,18 +106,41 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button className="submit" type="primary" htmlType="submit">
+        <Button
+          className="submit"
+          type="primary"
+          htmlType="submit"
+          style={{ marginRight: "5px" }}
+        >
           登入
         </Button>
-        <Space style={{ paddingLeft: "10px" }}>尚未註冊?</Space>
-        <Button
-          type="link"
-          htmlType="button"
-          onClick={Signup}
-          style={{ padding: "0" }}
-        >
-          註冊
-        </Button>
+        <span style={{ whiteSpace: "nowrap" }}>
+          <Space
+            style={{
+              paddingRight: "5px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            未有帳號?
+          </Space>
+          <Button
+            type="link"
+            htmlType="button"
+            onClick={Signup}
+            style={{ padding: "0", paddingRight: "5px" }}
+          >
+            註冊
+          </Button>
+          <Space style={{ paddingRight: "5px" }}>或</Space>
+          <Button
+            type="link"
+            htmlType="button"
+            onClick={anonymouslogin}
+            style={{ padding: "0" }}
+          >
+            匿名登入
+          </Button>
+        </span>
       </Form.Item>
     </Form>
   );
