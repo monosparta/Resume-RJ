@@ -49,6 +49,8 @@ const Login = () => {
   const anonymouslogin = async () => {
     if (localStorage.getItem("guestToken")) {
       localStorage.setItem("token", localStorage.getItem("guestToken"));
+      message.success("登入成功");
+      history("/");
     } else {
       try {
         const login = await axios.get("/api/anonymouslogin");
