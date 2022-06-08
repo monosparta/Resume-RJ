@@ -8,15 +8,17 @@ import Signup from "./Pages/Signup";
 import reportWebVitals from "./reportWebVitals";
 import MyLayout from "./Components/MyLayout.js";
 ReactDOM.render(
-  <Router>
-    <MyLayout>
-      <Routes>
-        <Route path="/" element={<Resume />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/Signup" element={<Signup />} />
-      </Routes>
-    </MyLayout>
-  </Router>,
+  <>
+    <Router>
+      <MyLayout>
+        <Routes>
+          <Route path="/" element={<Resume />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+        </Routes>
+      </MyLayout>
+    </Router>
+  </>,
   document.getElementById("root")
 );
 
