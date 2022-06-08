@@ -47,7 +47,13 @@ const Login = () => {
   };
 
   const anonymouslogin = async () => {
-    if (localStorage.getItem("guestToken")) {
+    if (
+      localStorage.getItem("guestId") &&
+      localStorage.getItem("guestName") &&
+      localStorage.getItem("guestToken")
+    ) {
+      localStorage.setItem("id", localStorage.getItem("guestId"));
+      localStorage.setItem("name", localStorage.getItem("guestName"));
       localStorage.setItem("token", localStorage.getItem("guestToken"));
       message.success("登入成功");
       history("/");
@@ -55,7 +61,9 @@ const Login = () => {
       try {
         const login = await axios.get("/api/anonymouslogin");
         localStorage.setItem("id", login.data["id"]);
+        localStorage.setItem("guestId", login.data["id"]);
         localStorage.setItem("name", login.data["name"]);
+        localStorage.setItem("guestName", login.data["name"]);
         localStorage.setItem("token", login.data["guestToken"]);
         localStorage.setItem("guestToken", login.data["guestToken"]);
         message.success("登入成功");
