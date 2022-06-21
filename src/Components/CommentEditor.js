@@ -35,23 +35,18 @@ const CommentEditor = () => {
     }
     setLoading(true);
     try {
-      await axios
-        .post(
-          "/api/auth/comment",
-          {
-            comment: value.trim(),
-          },
-          { headers: { token: localStorage.getItem("token") } }
-        )
-        .then((response) => {
-          if (response.data["err"]) {
-            message.error(response.data["err"]);
-          } else {
-            setLoadComment(true);
-          }
-        });
+      await axios.post(
+        "/api/auth/comment",
+        {
+          comment: value.trim(),
+        },
+        { headers: { token: localStorage.getItem("token") } }
+      );
+      setLoadComment(true);
       setValue("");
     } catch (error) {
+      setLoading(false);
+      message.error("請登入");
       throw new Error(error);
     }
     setLoading(false);
