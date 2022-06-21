@@ -46,6 +46,7 @@ const CommentEditor = () => {
       setValue("");
     } catch (error) {
       setLoading(false);
+      message.destroy()
       message.error("請先登入");
       throw new Error(error);
     }
@@ -56,6 +57,7 @@ const CommentEditor = () => {
     if (localStorage.getItem("token")) {
       setValue(e.target.value);
     } else {
+      message.destroy()
       message.error("請先登入");
     }
   };
