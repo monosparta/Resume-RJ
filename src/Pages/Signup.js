@@ -64,7 +64,7 @@ const Signup = () => {
         <Input />
       </Form.Item>
 
-      <Row gutter={24}>
+      <Row gutter={18}>
         <Col span={24} sm={12}>
           <Form.Item
             label="密碼"
