@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Comment, Form, Button, Input, Card } from "antd";
+import { Comment, Form, Button, Input, message, Card } from "antd";
 import axios from "../axios";
 import CommentList from "./CommentList.js";
 import "./CommentEditor.css";
