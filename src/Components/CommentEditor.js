@@ -35,14 +35,21 @@ const CommentEditor = () => {
     }
     setLoading(true);
     try {
-      await axios.post(
-        "/api/auth/comment",
-        {
-          comment: value.trim(),
-        },
-        { headers: { token: localStorage.getItem("token") } }
-      );
-      setLoadComment(true);
+      await axios
+        .post(
+          "/api/auth/comment",
+          {
+            comment: value.trim(),
+          },
+          { headers: { token: localStorage.getItem("token") } }
+        )
+        .then((response) => {
+          if (response.data["err"]) {
+            message.error(response.data["err"]);
+          } else {
+            setLoadComment(true);
+          }
+        });
       setValue("");
     } catch (error) {
       throw new Error(error);
