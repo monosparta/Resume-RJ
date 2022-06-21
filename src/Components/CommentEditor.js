@@ -46,14 +46,18 @@ const CommentEditor = () => {
       setValue("");
     } catch (error) {
       setLoading(false);
-      message.error("請登入");
+      message.error("請先登入");
       throw new Error(error);
     }
     setLoading(false);
   };
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    if (localStorage.getItem("token")) {
+      setValue(e.target.value);
+    } else {
+      message.error("請先登入");
+    }
   };
 
   return (
