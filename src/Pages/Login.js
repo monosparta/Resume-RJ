@@ -97,7 +97,6 @@ const Login = () => {
       <Form.Item
         name="email"
         label="電子信箱"
-        hasFeedback
         rules={[
           {
             type: "email",
@@ -115,7 +114,6 @@ const Login = () => {
       <Form.Item
         label="密碼"
         name="password"
-        hasFeedback
         rules={[{ required: true, message: "請輸入密碼" }]}
       >
         <Input.Password />

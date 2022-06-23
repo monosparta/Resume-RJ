@@ -41,7 +41,6 @@ const Signup = () => {
       <Form.Item
         label="名字"
         name="name"
-        hasFeedback
         rules={[{ required: true, message: "請輸入名字" }]}
       >
         <Input />
@@ -69,7 +68,6 @@ const Signup = () => {
           <Form.Item
             label="密碼"
             name="password"
-            hasFeedback
             rules={[{ required: true, message: "請輸入密碼" }]}
           >
             <Input.Password />
@@ -80,7 +78,6 @@ const Signup = () => {
             name="confirm"
             label="確認密碼"
             dependencies={["password"]}
-            hasFeedback
             rules={[
               {
                 required: true,
