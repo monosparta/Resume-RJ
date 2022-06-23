@@ -19,6 +19,10 @@ const Signup = () => {
     }
   };
 
+  const login = () => {
+    history("/login");
+  }
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -103,7 +107,12 @@ const Signup = () => {
           註冊
         </Button>
         <Space style={{ paddingLeft: "10px" }}>已有帳號?</Space>
-        <Button type="link" htmlType="button" style={{ padding: "0" }}>
+        <Button
+          type="link"
+          htmlType="button"
+          onClick={login}
+          style={{ padding: "0" }}
+        >
           登入
         </Button>
       </Form.Item>
