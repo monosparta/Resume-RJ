@@ -3,7 +3,7 @@ import React, {
   useState,
   // useRef
 } from "react";
-import { List, Input, Space, Button } from "antd";
+import { List, Input, Space, Button, message } from "antd";
 import axios from "../axios";
 import MyComment from "./MyComment.js";
 const { Search } = Input;
@@ -68,6 +68,10 @@ const CommentList = ({ setLoading, loading }) => {
         });
     } catch (error) {
       setLoading(true);
+      setSearch({
+        ...search,
+        loading: false,
+      });
       throw new Error(error);
     }
   };
